@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Kontak Kami";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/contact.css" />
+}
+
+<div class="contact-container">
+    <h2>Kontak Kami</h2>
+
+    <p class="subtitle">Jika Anda memiliki pertanyaan, saran, atau membutuhkan bantuan, silakan hubungi kami melalui form berikut.</p>
+
+    <form method="post" action="#">
+        <div class="form-group">
+            <label>Nama Anda</label>
+            <input type="text" name="Name" placeholder="Masukkan nama Anda" required />
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="Email" placeholder="Masukkan email Anda" required />
+        </div>
+
+        <div class="form-group">
+            <label>Pesan</label>
+            <textarea name="Message" placeholder="Tulis pesan Anda" required></textarea>
+        </div>
+
+        <button type="submit" class="btn-send">Kirim Pesan</button>
+    </form>
+
+    <div class="info-box">
+        <h3>Informasi Kontak</h3>
+        <p><strong>Alamat:</strong> Jl. Mawar No. 123, Jakarta</p>
+        <p><strong>Email:</strong> support@rentcar.com</p>
+        <p><strong>Telepon:</strong> +62 812 3456 7890</p>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Daftar Transaksi";
+}
+
+@model List<TrRental>
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
+
+<div class="admin-container">
+
+    <h2>Daftar Transaksi Penyewaan</h2>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Tanggal Sewa</th>
+                <th>Customer</th>
+                <th>Mobil</th>
+                <th>Total Hari</th>
+                <th>Total Harga</th>
+                <th>Status Pembayaran</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var t in Model)
+            {
+                var totalDays = (t.Return_Date - t.Rental_Date).Days + 1;
+
+                <tr>
+                    <td>
+                        @t.Rental_Date.ToString("dd MMM yyyy")
+                        -
+                        @t.Return_Date.ToString("dd MMM yyyy")
+                    </td>
+
+                    <td>@t.Customer?.Name</td>
+
+                    <td>
+                        @t.Car?.Name @t.Car?.Model (@t.Car?.Year)
+                    </td>
+
+                    <td>@totalDays hari</td>
+
+                    <td>Rp @string.Format("{0:N0}", t.Total_Price)</td>
+
+                    <td>
+                        @if (t.Payment_Status)
+                        {
+                            <span class="status-paid">Sudah Dibayar</span>
+                        }
+                        else
+                        {
+                            <span class="status-unpaid">Belum Dibayar</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Daftar Mobil";
+}
+
+@model List<MsCar>
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
+
+<div class="admin-container">
+    <h2>Daftar Mobil</h2>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Gambar</th>
+                <th>Nama Mobil</th>
+                <th>Tahun</th>
+                <th>Transmisi</th>
+                <th>Harga / Hari</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var c in Model)
+            {
+                var img = c.CarImages?.FirstOrDefault()?.Image_Link ?? "/img/no-image.png";
+
+                <tr>
+                    <td>
+                        <img src="@img" alt="@c.Name" class="car-thumb" />
+                    </td>
+
+                    <td>@c.Name @c.Model</td>
+
+                    <td>@c.Year</td>
+
+                    <td>@c.Transmission</td>
+
+                    <td>Rp. @string.Format("{0:N0}", c.Price_Per_Day)</td>
+
+                    <td>
+                        @if (c.Status)
+                        {
+                            <span class="status-active">Aktif</span>
+                        }
+                        else
+                        {
+                            <span class="status-inactive">Tidak Aktif</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

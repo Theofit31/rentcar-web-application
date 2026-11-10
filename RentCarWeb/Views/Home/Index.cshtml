@@ -1,0 +1,145 @@
+﻿@{
+    ViewData["Title"] = "Beranda";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" />
+}
+@model List<MsCar>
+<section class="hero">
+    <h1>Selamat Datang di Rental Mobil Kami</h1>
+
+    <div class="search-box">
+        <form method="get" asp-action="Index">
+            <div class="form-group">
+                <label>Pickup Date:</label>
+                <input type="date" name="pickupDate" value="@ViewBag.PickupDate" required />
+            </div>
+            <div class="form-group">
+                <label>Return Date:</label>
+                <input type="date" name="returnDate" value="@ViewBag.ReturnDate" required />
+            </div>
+            <div class="form-group">
+                <label>Filter Tahun Pembuatan:</label>
+                <select name="yearFilter">
+                    <option value="">Semua Tahun</option>
+                    @for (int y = DateTime.Now.Year; y >= 2018; y--)
+                    {
+                        <option value="@y" selected="@(ViewBag.YearFilter == y ? "selected" : null)">@y</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn-search">Cari</button>
+        </form>
+    </div>
+
+    <div class="search-text-box">
+        <form method="get" asp-action="Index" style="display:flex; gap:10px; justify-content:center;">
+            <input type="hidden" name="pickupDate" value="@ViewBag.PickupDate" />
+            <input type="hidden" name="returnDate" value="@ViewBag.ReturnDate" />
+            <input type="hidden" name="yearFilter" value="@ViewBag.YearFilter" />
+
+            <input type="text"
+                name="search"
+                value="@ViewBag.Search"
+                placeholder="Cari mobil (nama/model/transmisi/tahun)..."
+                class="search-input" />
+
+            <button type="submit" class="btn-search-secondary">Cari</button>
+        </form>
+    </div>
+</section>
+
+@if (Model != null && Model.Any())
+{
+    <div class="filter-section">
+        <label>Sortir Berdasarkan:</label>
+        <select id="sortSelect">
+            <option value="asc">Harga Terendah - Tertinggi</option>
+            <option value="desc">Harga Tertinggi - Terendah</option>
+        </select>
+    </div>
+
+    <div class="car-list" id="carContainer">
+        @foreach (var car in Model)
+        {
+            <div class="car-card" data-price="@car.Price_Per_Day">
+                <img src="@car.CarImages?.FirstOrDefault()?.Image_Link" alt="@car.Name" />
+                <h3>@car.Name @car.Model @car.Year</h3>
+                <p>Harga: Rp. @string.Format("{0:N0}", car.Price_Per_Day) / hari</p>
+
+                @if (Context.Session.GetString("UserId") == null)
+                {
+                    <a href="/Auth/Login?returnUrl=@Url.Action("Detail", "Rental", new {
+                        id = car.Car_Id,
+                        pickupDate = ViewBag.PickupDate,
+                        returnDate = ViewBag.ReturnDate
+                    })" class="btn-rent">
+                        Sewa Sekarang
+                    </a>
+
+                }
+                else
+                {
+                    <a asp-controller="Rental"
+                        asp-action="Detail"
+                        asp-route-id="@car.Car_Id"
+                        asp-route-pickupDate="@ViewBag.PickupDate"
+                        asp-route-returnDate="@ViewBag.ReturnDate"
+                        class="btn-sewa">
+                        Sewa Sekarang
+                    </a>
+
+                }
+            </div>
+        }
+    </div>
+
+    @if (ViewBag.TotalPages != null && ViewBag.TotalPages > 1)
+    {
+    <div class="pagination">
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <a class="page-btn @(i == ViewBag.Page ? "active" : "")"
+               href="@Url.Action("Index", new {
+                    pickupDate = ViewBag.PickupDate,
+                    returnDate = ViewBag.ReturnDate,
+                    yearFilter = ViewBag.YearFilter,
+                    page = i
+                })">
+                @i
+            </a>
+        }
+    </div>
+    }
+}
+else
+{
+    <p class="no-data">Silakan pilih tanggal penyewaan, lalu klik <strong>Cari</strong> untuk menampilkan mobil tersedia.</p>
+}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const sortSelect = document.getElementById("sortSelect");
+        const container = document.getElementById("carContainer");
+
+        function applySorting() {
+            if (!sortSelect || !container) return;
+
+            const cards = Array.from(container.querySelectorAll(".car-card"));
+            const sorted = cards.sort((a, b) => {
+                const priceA = parseFloat(a.dataset.price);
+                const priceB = parseFloat(b.dataset.price);
+                return sortSelect.value === "asc" ? priceA - priceB : priceB - priceA;
+            });
+
+            container.innerHTML = "";
+            sorted.forEach(c => container.appendChild(c));
+        }
+
+        if (sortSelect) {
+            sortSelect.addEventListener("change", applySorting);
+        }
+
+        applySorting();
+    });
+</script>

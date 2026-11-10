@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Pembayaran";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/payment.css" />
+}
+<div class="payment-container">
+    <h2>Halaman Pembayaran</h2>
+
+    <table class="payment-table">
+        <tr><td>Mobil</td><td>@ViewBag.CarName</td></tr>
+        <tr><td>Harga per Hari</td><td>Rp. @string.Format("{0:N0}", ViewBag.PricePerDay)</td></tr>
+        <tr><td>Total Hari</td><td>@ViewBag.TotalDays</td></tr>
+        <tr><td>Total Harga</td><td>Rp. @string.Format("{0:N0}", ViewBag.TotalPrice)</td></tr>
+    </table>
+
+    <form method="post" action="/Rental/ConfirmPayment">
+        <input type="hidden" name="rentalId" value="@ViewBag.RentalId" />
+
+        <label>Metode Pembayaran:</label>
+        <select name="paymentMethod" required>
+            <option value="">-- Pilih Metode --</option>
+            <option value="Transfer Bank">Transfer Bank</option>
+            <option value="Virtual Account">Virtual Account</option>
+            <option value="Kartu Kredit">Kartu Kredit</option>
+        </select>
+
+        <button type="submit" class="btn-confirm">Konfirmasi Pembayaran</button>
+    </form>
+</div>

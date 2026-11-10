@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Daftar Customer";
+}
+
+@model List<MsCustomer>
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
+
+<div class="admin-container">
+
+    <h2>Daftar Customer</h2>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Telepon</th>
+                <th>Alamat</th>
+                <th>SIM</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>@c.Name</td>
+                    <td>@c.Email</td>
+                    <td>@c.Phone_Number</td>
+                    <td>@c.Address</td>
+                    <td>@(string.IsNullOrEmpty(c.Driver_License_Number) ? "-" : c.Driver_License_Number)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

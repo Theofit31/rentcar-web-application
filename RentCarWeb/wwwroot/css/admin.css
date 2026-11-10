@@ -1,0 +1,110 @@
+﻿.admin-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    background: #f4eaff;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4b2673;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.admin-table th, .admin-table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.admin-table th {
+    background: #e6ccff;
+    color: #4b2673;
+    font-weight: bold;
+}
+
+.admin-table tr:hover {
+    background-color: #faf2ff;
+}
+
+.car-thumb {
+    width: 80px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.status-active {
+    color: green;
+    font-weight: bold;
+}
+
+.status-inactive {
+    color: red;
+    font-weight: bold;
+}
+
+.admin-dashboard {
+    max-width: 900px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.stat-card {
+    background: #e6ccff;
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 18px;
+    color: #4b2673;
+    font-weight: bold;
+}
+
+.admin-links {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.admin-btn {
+    background: #b388ff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.admin-btn:hover {
+    background: #9c6cff;
+}
+
+.status-paid {
+    color: green;
+    font-weight: bold;
+}
+
+.status-unpaid {
+    color: red;
+    font-weight: bold;
+}

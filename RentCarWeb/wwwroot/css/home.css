@@ -1,0 +1,176 @@
+﻿.hero {
+    text-align: center;
+    padding: 50px 20px 30px 20px;
+}
+
+.hero h1 {
+    font-size: 28px;
+    color: #4b2673;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+/* Kotak pencarian */
+.search-box {
+    background: #dbe3ff;
+    padding: 20px 25px;
+    display: inline-block;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.form-group {
+    display: inline-block;
+    margin-right: 12px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    min-width: 150px;
+}
+
+.btn-search {
+    background-color: #ffb3b3;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #4b2673;
+}
+
+.btn-search:hover {
+    background-color: #ff9999;
+}
+
+/* ===== DAFTAR MOBIL ===== */
+.filter-section {
+    margin: 30px auto 15px;
+    text-align: center;
+}
+
+.filter-section select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.car-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    padding: 20px;
+}
+
+.car-card {
+    background: #dbe3ff;
+    border-radius: 12px;
+    width: 230px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.car-card:hover {
+    transform: translateY(-5px);
+}
+
+.car-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.car-card h3 {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #4b2673;
+}
+
+.car-card p {
+    font-size: 14px;
+    color: #333;
+}
+
+.btn-rent, .btn-sewa {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #ffd6a5;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #4b2673;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn-rent:hover, .btn-sewa:hover {
+    background-color: #ffb84d;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.page-btn {
+    padding: 8px 14px;
+    margin: 0 4px;
+    background: #dbe3ff;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.page-btn.active {
+    background: #ff9999;
+    color: #4b2673;
+}
+
+.no-data {
+    text-align: center;
+    color: #666;
+    margin-top: 30px;
+}
+.search-text-box {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+
+.search-input {
+    width: 280px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #bbb;
+    font-size: 14px;
+}
+
+.btn-search-secondary {
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: #ffb3b3;
+    border: none;
+    color: #4b2673;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-search-secondary:hover {
+    background: #ff9999;
+}

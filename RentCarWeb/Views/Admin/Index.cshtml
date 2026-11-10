@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
+<div class="admin-dashboard">
+    <h2>Admin Dashboard</h2>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h3>Total Mobil</h3>
+            <p>@ViewBag.TotalCars</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Customer</h3>
+            <p>@ViewBag.TotalCustomers</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Transaksi</h3>
+            <p>@ViewBag.TotalTransactions</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Sudah Dibayar</h3>
+            <p>@ViewBag.PaidTransactions</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Belum Dibayar</h3>
+            <p>@ViewBag.UnpaidTransactions</p>
+        </div>
+
+    </div>
+
+    <div class="admin-links">
+        <a class="admin-btn" href="/Admin/Cars">Daftar Mobil</a>
+        <a class="admin-btn" href="/Admin/Customers">Daftar Customer</a>
+        <a class="admin-btn" href="/Admin/Transactions">Daftar Transaksi</a>
+    </div>
+</div>

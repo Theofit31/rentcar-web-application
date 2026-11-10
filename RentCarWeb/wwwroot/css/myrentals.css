@@ -1,0 +1,101 @@
+﻿.rental-history-container {
+    background: #f4eaff;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 30px auto;
+    max-width: 900px;
+}
+
+h2 {
+    text-align: center;
+    color: #4b2673;
+    margin-bottom: 20px;
+}
+
+.rental-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.rental-table th, .rental-table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.rental-table th {
+    background-color: #e6ccff;
+    color: #4b2673;
+}
+
+.status-paid {
+    color: green;
+    font-weight: bold;
+}
+
+.status-unpaid {
+    color: red;
+    font-weight: bold;
+}
+
+.btn-pay {
+    display: inline-block;
+    background: #4CC5F5;
+    padding: 4px 14px;
+    border-radius: 6px;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s ease-in-out;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+.btn-pay:hover {
+    background: #26C2FF;
+    transform: translateY(-2px);
+}
+
+.btn-pay:active {
+    transform: scale(0.95);
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.checkmark {
+    color: green;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.btn-cancel {
+    background: #ff6b6b;
+    padding: 10px 14px;
+    border-radius: 6px;
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+.btn-cancel:hover {
+    background: #ff4d4d;
+    transform: translateY(-2px);
+}
+
+.btn-cancel:active {
+    transform: scale(0.95);
+}

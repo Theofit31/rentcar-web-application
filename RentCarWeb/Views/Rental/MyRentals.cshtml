@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Riwayat Penyewaan";
+}
+
+@model List<TrRental>
+@section Styles {
+    <link rel="stylesheet" href="~/css/myrentals.css" />
+}
+<div class="rental-history-container">
+    <h2>Mobil yang Pernah / Sedang Disewa</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert-success">@TempData["Success"]</div>
+    }
+
+    <table class="rental-table">
+        <thead>
+            <tr>
+                <th>Tanggal Sewa</th>
+                <th>Mobil</th>
+                <th>Harga Sewa per Hari</th>
+                <th>Total Hari</th>
+                <th>Total Harga</th>
+                <th>Status Pembayaran</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+                var totalDays = (r.Return_Date - r.Rental_Date).Days + 1;
+
+                <tr>
+                    <td>@r.Rental_Date.ToString("dd MMMM yyyy") - @r.Return_Date.ToString("dd MMMM yyyy")</td>
+                    <td>@r.Car?.Name @r.Car?.Model @r.Car?.Year</td>
+                    <td>Rp. @string.Format("{0:N0}", r.Car?.Price_Per_Day)</td>
+                    <td>@totalDays</td>
+                    <td>Rp. @string.Format("{0:N0}", r.Total_Price)</td>
+                    <td>
+                        @if (r.Payment_Status)
+                        {
+                            <span class="status-paid">Sudah Dibayar</span>
+                        }
+                        else
+                        {
+                            <span class="status-unpaid">Belum Dibayar</span>
+                        }
+                    </td>
+                    <td>
+                        @if (!r.Payment_Status)
+                        {
+                            <div style="display:flex; gap:8px; justify-content:center;">
+
+                                <a href="/Rental/Payment?rentalId=@r.Rental_Id"
+                                   class="btn-pay">Bayar Sekarang</a>
+
+                                <form method="post" asp-action="Cancel" onsubmit="return confirm('Yakin ingin membatalkan pesanan ini?');">
+                                    <input type="hidden" name="rentalId" value="@r.Rental_Id" />
+                                    <button type="submit" class="btn-cancel">Batalkan Penyewaan</button>
+                                </form>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="checkmark">✓</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

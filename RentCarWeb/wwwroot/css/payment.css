@@ -1,0 +1,50 @@
+﻿.payment-container {
+    background: #f4eaff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 420px;
+    margin: 40px auto;
+}
+
+h2 {
+    text-align: center;
+    color: #4b2673;
+    margin-bottom: 20px;
+}
+
+.payment-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.payment-table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.btn-confirm {
+    background: #ffb3b3;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    color: #4b2673;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-confirm:hover {
+    background: #ff9999;
+}

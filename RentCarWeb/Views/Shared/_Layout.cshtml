@@ -1,0 +1,85 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var userName = HttpContextAccessor.HttpContext.Session.GetString("UserName");
+}
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RentCar</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="navbar">
+        <div class="navbar-left">
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <h2 class="brand">RentCar</h2>
+        </div>
+
+        <div class="navbar-right">
+            @if (string.IsNullOrEmpty(userName))
+            {
+                <a href="/Auth/Login" class="btn-login">Login</a>
+                <a href="/Auth/Register" class="btn-register">Registrasi</a>
+            }
+            else
+            {
+                <div class="user-info">
+                    <span class="welcome">Hai, @userName</span>
+                    <a href="/Auth/Logout" class="btn-logout">Logout</a>
+                </div>
+            }
+        </div>
+    </header>
+
+    <!-- SIDEBAR -->
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="toggleMenu()">&times;</a>
+        <a href="/">Home</a>
+        @if (Context.Session.GetString("UserId") == null)
+        {
+            <a href="/Auth/Login?returnUrl=/Rental/MyRentals">Riwayat Penyewaan</a>
+        }
+        else
+        {
+            <a href="/Rental/MyRentals">Riwayat Penyewaan</a>
+        }
+
+        <a href="/Home/Contact">Kontak Kami</a>
+        @if (Context.Session.GetString("UserId") == null)
+        {
+            <a href="/Auth/Login?returnUrl=/Auth/Profile">Profil</a>
+        }
+        else
+        {
+            <a href="/Auth/Profile">Profil</a>
+        }
+
+        <a href="/Admin/Index">Dashboard Admin</a>
+    </div>
+
+    <!-- CONTENT -->
+    <main role="main" class="content">
+        @RenderBody()
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2025 RentCar App. Semua Hak Dilindungi.</p>
+    </footer>
+
+    <!-- SCRIPT -->
+    <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.style.width = (sidebar.style.width === "250px") ? "0" : "250px";
+        }
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

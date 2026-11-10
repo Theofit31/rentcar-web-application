@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+
+@model RentCarWeb.Models.ViewModels.RegisterViewModel
+@section Styles {
+    <link rel="stylesheet" href="~/css/register.css" />
+}
+
+<div class="register-container">
+
+    <h2>Registrasi ke RentCar</h2>
+
+    <form method="post">
+        <div class="form-group">
+            <label>Nama Lengkap</label>
+            <input type="text" name="Name" value="@Model?.Name" placeholder="Masukkan nama lengkap Anda"/>
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="Email" value="@Model?.Email" placeholder="Masukkan email Anda"/>
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="Password" placeholder="Masukkan password Anda"/>
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+
+        <div class="form-group">
+            <label>Re-Password</label>
+            <input type="password" name="RePassword" placeholder="Masukkan kembali password Anda"/>
+            @Html.ValidationMessageFor(m => m.RePassword)
+        </div>
+
+        <div class="form-group">
+            <label>Nomor Telepon</label>
+            <input type="text" name="Phone" value="@Model?.Phone" placeholder="Masukkan nomor telefon Anda"/>
+            @Html.ValidationMessageFor(m => m.Phone)
+        </div>
+
+        <div class="form-group">
+            <label>Alamat</label>
+            <textarea name="Address" placeholder="Masukkan alamat Anda">@Model?.Address</textarea>
+            @Html.ValidationMessageFor(m => m.Address)
+        </div>
+
+        <button type="submit" class="btn-register">Registrasi</button>
+    </form>
+
+    <p class="login-link">
+        Sudah punya akun? <a href="/Auth/Login">Login disini</a>
+    </p>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Detail";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/detail.css" />
+}
+
+@{
+    var car = ViewBag.Car as MsCar;
+    var images = car?.CarImages?.ToList() ?? new List<MsCarImages>();
+    var pickupDate = ViewBag.PickupDate;
+    var returnDate = ViewBag.ReturnDate;
+    var userName = ViewBag.UserName;
+    var userEmail = ViewBag.UserEmail;
+    var totalPrice = (decimal)ViewBag.TotalPrice;
+    var days = (int)ViewBag.Days;
+}
+
+<div class="rental-container">
+    <h2>Sewa Mobil</h2>
+
+    <!-- Carousel -->
+    <div class="carousel">
+        <img id="carImage" src="@images.FirstOrDefault()?.Image_Link" alt="@car.Name" />
+        <button class="prev" onclick="prevImage()">‹ Prev</button>
+        <button class="next" onclick="nextImage()">Next ›</button>
+    </div>
+
+    <!-- Info Table -->
+    <div class="info-box">
+        <h3>Informasi Mobil</h3>
+        <table>
+            <tr><td>Tipe Mobil</td><td>@car?.Model</td></tr>
+            <tr><td>Nama Mobil</td><td>@car?.Name @car?.Year</td></tr>
+            <tr><td>Transmisi</td><td>@car?.Transmission</td></tr>
+            <tr><td>Jumlah Penumpang</td><td>@car?.Number_Of_Car_Seats Penumpang</td></tr>
+            <tr><td>Nama Penyewa</td><td>@userName (@userEmail)</td></tr>
+            <tr><td>Tanggal Sewa</td><td>@pickupDate sampai @returnDate</td></tr>
+            <tr><td>Harga Sewa</td><td>Rp. @car?.Price_Per_Day.ToString("N0") / hari</td></tr>
+            <tr><td>Total Harga Sewa</td><td>Rp. @totalPrice.ToString("N0")</td></tr>
+        </table>
+
+        <form method="post" action="/Rental/Confirm">
+            <input type="hidden" name="carId" value="@car?.Car_Id" />
+            <input type="hidden" name="pickupDate" value="@ViewBag.PickupDate" />
+            <input type="hidden" name="returnDate" value="@ViewBag.ReturnDate" />
+            <input type="hidden" name="totalPrice" value="@totalPrice" />
+            <button type="submit" class="btn-sewa">Sewa</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const images = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(images.Select(i => i.Image_Link)));
+        let current = 0;
+
+        function showImage() {
+            document.getElementById("carImage").src = images[current];
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            showImage();
+        });
+
+        function nextImage() {
+            current = (current + 1) % images.length;
+            showImage();
+        }
+
+        function prevImage() {
+            current = (current - 1 + images.length) % images.length;
+            showImage();
+        }
+    </script>
+}
